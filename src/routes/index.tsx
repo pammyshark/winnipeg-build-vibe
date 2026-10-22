@@ -50,6 +50,25 @@ function Sticker({ children, fill = "var(--brand)", tilt = "4deg", className = "
   );
 }
 
+/* Photo cut into the same wavy shape, inside a very thick yellow wavy frame. */
+const WAVY_INNER = wavyPath(400, 84, 5, 9);
+function PhotoFrame({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="float relative aspect-square" style={{ ["--tilt" as string]: "-4deg" }}>
+      <svg viewBox="0 0 400 400" className="h-full w-full drop-shadow-[0_24px_40px_rgba(0,0,0,.45)]" role="img" aria-label={alt}>
+        <defs>
+          <clipPath id="photo-wave">
+            <path d={WAVY_INNER} />
+          </clipPath>
+        </defs>
+        <path d={WAVY} fill="var(--brand)" />
+        <image href={src} x="66" y="66" width="268" height="268" preserveAspectRatio="xMidYMid slice" clipPath="url(#photo-wave)" />
+        <path d={WAVY_INNER} fill="none" stroke="#000" strokeOpacity=".18" strokeWidth="3" />
+      </svg>
+    </div>
+  );
+}
+
 function Star({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={`inline-block h-[0.8em] w-[0.8em] ${className}`} aria-hidden="true">
@@ -240,9 +259,7 @@ function Index() {
           <Label>Organizer</Label>
           <div className="flex flex-col gap-12 md:flex-row md:items-center">
             <div className="relative mx-auto w-60 shrink-0 md:mx-0 md:w-72">
-              <Sticker tilt="-4deg">
-                <img src={pam.url} alt="Pamela Mollinedo" className="aspect-square w-full rounded-full object-cover" />
-              </Sticker>
+              <PhotoFrame src={pam.url} alt="Pamela Mollinedo" />
             </div>
             <div className="max-w-2xl">
               <h2 className="font-display text-4xl font-extrabold tracking-tight md:text-6xl">Pamela Mollinedo</h2>
@@ -257,10 +274,7 @@ function Index() {
 
       <footer className="mt-16 border-t border-white/15">
         <div className="mx-auto max-w-6xl px-6 py-14">
-          <p className="font-display text-[clamp(3rem,11vw,9rem)] font-extrabold leading-none tracking-[-0.05em]">
-            BuildVibe<span className="text-brand">@</span>WPG
-          </p>
-          <div className="mt-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <img src={logo.url} alt="BuildVibe" className="h-8 w-auto self-start" />
             <p className="text-sm opacity-70">Workshops, build nights &amp; builder meetups · Coming to more cities soon</p>
             <a href={LINKEDIN} target="_blank" rel="noreferrer" className="text-sm font-bold text-brand hover:underline">LinkedIn</a>
