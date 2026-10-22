@@ -19,7 +19,7 @@
  */
 
 @theme inline {
-  --font-display: "Space Grotesk", sans-serif;
+  --font-display: "Bricolage Grotesque", sans-serif;
   --font-sans: "DM Sans", sans-serif;
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
@@ -169,6 +169,44 @@
 @utility glass {
   background: var(--surface); border: 1px solid oklch(1 0 0 / 12%); backdrop-filter: blur(12px); border-radius: 1.5rem;
 }
+/* Film grain over the gradient so the background has texture, not a flat fill */
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 60; opacity: .14; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* Tilted scrolling ribbons */
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@utility ribbon {
+  position: relative; left: -5vw; width: 110vw; overflow: hidden; white-space: nowrap;
+  padding: .7rem 0; font-family: var(--font-display); font-weight: 800; font-size: clamp(1rem, 2.2vw, 1.6rem);
+  box-shadow: 0 18px 40px -18px oklch(0 0 0 / 70%);
+}
+@utility ribbon-track {
+  display: inline-flex; gap: 2.5rem; animation: marquee 28s linear infinite;
+  & > span { display: inline-flex; align-items: center; gap: 2.5rem; }
+}
+@media (prefers-reduced-motion: reduce) { .ribbon-track, .float { animation: none !important; } }
+
+/* Floating sticker */
+@keyframes float { 0%,100% { transform: rotate(var(--tilt, 4deg)) translateY(0); } 50% { transform: rotate(var(--tilt, 4deg)) translateY(-10px); } }
+@utility float { animation: float 6s ease-in-out infinite; }
+
+/* Cards with a hard offset shadow for depth */
+@utility card-pop {
+  background: oklch(0.16 0.08 278 / 70%); border: 1.5px solid oklch(1 0 0 / 18%); border-radius: 1.5rem;
+  box-shadow: 8px 8px 0 0 var(--brand); transition: transform .25s, box-shadow .25s;
+  &:hover { transform: translate(-3px, -3px) rotate(-.6deg); box-shadow: 12px 12px 0 0 var(--brand); }
+}
+@utility outline-num {
+  font-family: var(--font-display); font-weight: 800; line-height: 1; color: transparent;
+  -webkit-text-stroke: 2px var(--brand);
+}
+@utility section-title {
+  font-family: var(--font-display); font-weight: 800; letter-spacing: -.03em; line-height: .95;
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+}
+
 @utility pill {
   display: inline-block; border: 1px solid color-mix(in oklab, var(--brand) 60%, transparent); color: var(--brand);
   border-radius: 999px; padding: .25rem .75rem; font-size: .8rem; font-weight: 600;
