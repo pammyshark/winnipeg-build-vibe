@@ -264,7 +264,7 @@ function Index() {
             <div className="max-w-2xl">
               <h2 className="font-display text-4xl font-extrabold tracking-tight md:text-6xl">Pamela Mollinedo</h2>
               <p className="mt-5 text-lg opacity-85">
-                MMIT graduate student at the University of Winnipeg, instructor, and builder. I've taught hands-on Python and SQL to learners of all levels, and I'm part of Lovable's SheBuilds community. BuildVibe is my way of helping more people build with AI.
+                MiM TIO graduate student at the University of Winnipeg, former SaaS CMO, instructor, and AI Product Builder. I've taught hands-on Python and SQL to learners of all levels, and I'm part of Lovable's SheBuilds community. BuildVibe is my way of helping more people build with AI.
               </p>
               <a href={LINKEDIN} target="_blank" rel="noreferrer" className="btn-ghost-light mt-7">Connect on LinkedIn <span aria-hidden="true">→</span></a>
             </div>
