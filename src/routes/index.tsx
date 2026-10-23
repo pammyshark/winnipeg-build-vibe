@@ -10,7 +10,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "BuildVibe — Build something real with AI in Winnipeg" },
-      { name: "description", content: "Free hands-on AI building workshops in Winnipeg. No coding experience needed." },
+      { name: "description", content: "Free hands-on AI building workshop at the University of Winnipeg, Tue Nov 17, 6:00–8:30 pm. Limited spots, RSVP required." },
       { property: "og:title", content: "BuildVibe — Build something real with AI" },
       { property: "og:description", content: "Free hands-on AI building workshops in Winnipeg. No coding experience needed." },
       { property: "og:type", content: "website" },
@@ -108,8 +108,8 @@ function Label({ children }: { children: string }) {
   );
 }
 
-const TOP = ["BuildVibe", "Build with AI", "Winnipeg", "Free", "In person", "No coding needed"];
-const BOTTOM = ["First event coming soon", "Portfolios", "Business websites", "Show & Tell", "Lovable credits for everyone"];
+const TOP = ["BuildVibe", "Build with AI", "Tue Nov 17", "University of Winnipeg", "Free", "No coding needed"];
+const BOTTOM = ["Nov 17 · 6:00–8:30 pm", "Limited spots · RSVP", "Portfolios", "Business websites", "Show & Tell", "Lovable credits for everyone"];
 
 function Index() {
   const [open, setOpen] = useState(false);
@@ -124,7 +124,7 @@ function Index() {
     <div className="min-h-screen overflow-x-clip">
       <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
         <img src={logo.url} alt="BuildVibe" className="h-9 w-auto md:h-11" />
-        <button onClick={show} className="btn-brand">Register</button>
+        <button onClick={show} className="btn-brand">RSVP</button>
       </header>
 
       {/* HERO */}
@@ -157,17 +157,17 @@ function Index() {
               <span className="flex items-center gap-2">Build <span className="h-3 w-3 rounded-full bg-white" /></span>
               <span className="flex items-center gap-2">Show it off <span className="h-3 w-3 rounded-full bg-[#7b78ff]" /></span>
             </p>
-            <p className="mt-4 max-w-md text-lg opacity-80">Free hands-on workshops. No coding experience needed.</p>
+            <p className="mt-4 max-w-md text-lg opacity-80">Free hands-on workshop. No coding experience needed. Limited spots, RSVP to save yours.</p>
             <button onClick={show} className="mt-10 inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-lg font-bold text-black transition hover:-translate-y-0.5 hover:bg-brand">
-              Join the first event <span aria-hidden="true">→</span>
+              RSVP for Nov 17 <span aria-hidden="true">→</span>
             </button>
           </div>
 
           <Sticker className="mx-auto w-64 md:w-80" tilt="5deg">
             <p className="font-display text-3xl font-extrabold leading-none text-black md:text-4xl">Event</p>
             <span className="my-3 rounded-xl bg-black px-4 py-1.5 font-display text-4xl font-extrabold text-brand md:text-5xl">#1</span>
-            <p className="font-display text-xl font-extrabold leading-tight text-black md:text-2xl">Free · Winnipeg</p>
-            <p className="mt-1 text-sm font-bold uppercase tracking-widest text-black/70">Date TBA</p>
+            <p className="font-display text-xl font-extrabold leading-tight text-black md:text-2xl">Tue · Nov 17</p>
+            <p className="mt-1 text-sm font-bold uppercase tracking-widest text-black/70">6:00–8:30 pm · UWinnipeg</p>
           </Sticker>
         </div>
 
@@ -189,7 +189,7 @@ function Index() {
           <Label>First event</Label>
           <div className="card-pop relative grid gap-10 p-8 md:grid-cols-[1fr_1.4fr] md:items-center md:p-14">
             <span className="absolute -top-4 right-6 rotate-3 rounded-full bg-brand px-4 py-1.5 text-sm font-extrabold uppercase tracking-wider text-black md:right-10">
-              Registration soon
+              Limited spots · RSVP
             </span>
             <img src={logoTag.url} alt="BuildVibe — Build with AI" className="w-full max-w-sm" />
             <div>
@@ -198,7 +198,7 @@ function Index() {
                 A hands-on workshop where you'll build your own portfolio, or a website for the business you're dreaming of, using AI. We'll finish with a Show &amp; Tell where everyone demos what they built.
               </p>
               <dl className="mt-6 grid grid-cols-2 gap-4 text-sm">
-                {[["Date", "TBA"], ["Venue", "TBA, Winnipeg"], ["Cost", "Free"], ["Perk", "Lovable credits for everyone"]].map(([k, v]) => (
+                {[["Date", "Tuesday, November 17"], ["Time", "6:00–8:30 pm"], ["Venue", "University of Winnipeg (room TBA)"], ["Cost", "Free · Lovable credits for everyone"]].map(([k, v]) => (
                   <div key={k}>
                     <dt className="text-xs font-bold uppercase tracking-widest text-brand">{k}</dt>
                     <dd className="mt-1 font-medium">{v}</dd>
@@ -208,7 +208,10 @@ function Index() {
               <div className="mt-6 flex flex-wrap gap-2">
                 {["In person", "Beginner-friendly", "18+", "Free"].map((t) => <span key={t} className="pill">{t}</span>)}
               </div>
-              <button onClick={show} className="btn-brand mt-8 px-8 py-4">Register <span aria-hidden="true">→</span></button>
+              <p className="mt-6 rounded-xl border border-brand/50 bg-brand/10 px-4 py-3 text-sm font-medium">
+                <span className="font-bold text-brand">Limited capacity.</span> Spots are first come, first served, so please RSVP before the event to save yours.
+              </p>
+              <button onClick={show} className="btn-brand mt-6 px-8 py-4">RSVP <span aria-hidden="true">→</span></button>
             </div>
           </div>
         </section>
@@ -287,8 +290,8 @@ function Index() {
           <div role="dialog" aria-modal="true" aria-labelledby="reg-title" className="relative w-full max-w-sm" onClick={(e) => e.stopPropagation()}>
             <Sticker tilt="-2deg">
               <button aria-label="Close" onClick={() => setOpen(false)} className="absolute right-[12%] top-[10%] text-3xl font-bold text-black/70 hover:text-black">×</button>
-              <p id="reg-title" className="font-display text-3xl font-extrabold leading-none text-black">Registration opens soon!</p>
-              <p className="mt-3 font-medium text-black/75">Follow along on LinkedIn for updates.</p>
+              <p id="reg-title" className="font-display text-3xl font-extrabold leading-none text-black">RSVP opens soon!</p>
+              <p className="mt-3 font-medium text-black/75">Nov 17 · 6:00–8:30 pm · UWinnipeg. Spots are limited, so follow on LinkedIn to catch the RSVP link first.</p>
               <a href={LINKEDIN} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 font-bold text-brand transition hover:-translate-y-0.5">
                 Follow on LinkedIn →
               </a>
