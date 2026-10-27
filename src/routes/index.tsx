@@ -6,6 +6,7 @@ import pam from "@/assets/Pam_photo_square.jpg.asset.json";
 
 const LINKEDIN = "https://www.linkedin.com/in/pamela-mollinedo/";
 const RSVP_URL = "https://www.eventbrite.ca/e/buildvibe-build-with-ai-tickets-2003979131528";
+const VOLUNTEER_URL = "https://forms.gle/nkiTEBzkkxbBSXwQA";
 const EVENTBRITE_ORG = "https://www.eventbrite.ca/o/121909793499";
 const ext = { href: RSVP_URL, target: "_blank", rel: "noreferrer" } as const;
 
@@ -294,6 +295,14 @@ function Index() {
               <a href={LINKEDIN} target="_blank" rel="noreferrer" className="btn-ghost-light mt-7">Connect on LinkedIn <span aria-hidden="true">→</span></a>
             </div>
           </div>
+        </section>
+
+        {/* VOLUNTEER */}
+        <section id="volunteer" className="scroll-mt-8 flex flex-wrap items-center gap-x-6 gap-y-4 pb-12">
+          <p className="font-display text-2xl font-extrabold tracking-tight md:text-3xl">Wanna become a volunteer?</p>
+          <a href={VOLUNTEER_URL} target="_blank" rel="noreferrer" className="btn-ghost-light text-sm">
+            Sign up to volunteer <span aria-hidden="true">→</span>
+          </a>
         </section>
       </main>
 
