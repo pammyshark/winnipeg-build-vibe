@@ -1,10 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import logo from "@/assets/BuildVibe_logo.png.asset.json";
 import logoTag from "@/assets/BuildVibe_logotagline.png.asset.json";
 import pam from "@/assets/Pam_photo_square.jpg.asset.json";
 
 const LINKEDIN = "https://www.linkedin.com/in/pamela-mollinedo/";
+const RSVP_URL = "https://www.eventbrite.ca/e/buildvibe-build-with-ai-tickets-2003979131528";
+const EVENTBRITE_ORG = "https://www.eventbrite.ca/o/121909793499";
+const ext = { href: RSVP_URL, target: "_blank", rel: "noreferrer" } as const;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -108,23 +111,23 @@ function Label({ children }: { children: string }) {
   );
 }
 
+const FAQ: [string, string][] = [
+  ["Do I need to know how to code?", "No! You'll build using AI tools. If you can describe your idea, you can build it."],
+  ["What do I need to bring?", "A charged laptop. Tablets and phones won't work well for building."],
+  ["Is it really free?", "Yes, completely free, including Lovable credits to build with."],
+  ["What if I can't make it?", "Please cancel your ticket so someone on the waitlist can take your spot."],
+  ["Where exactly is it?", "At the University of Winnipeg. The exact room will be emailed to registered attendees."],
+];
+
 const TOP = ["BuildVibe", "Build with AI", "Tue Nov 17", "University of Winnipeg", "Free", "No coding needed"];
 const BOTTOM = ["Nov 17 · 6:00–8:30 pm", "Limited spots · RSVP", "Portfolios", "Business websites", "Show & Tell", "Lovable credits for everyone"];
 
 function Index() {
-  const [open, setOpen] = useState(false);
-  const show = () => setOpen(true);
-  useEffect(() => {
-    const k = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    window.addEventListener("keydown", k);
-    return () => window.removeEventListener("keydown", k);
-  }, []);
-
   return (
     <div className="min-h-screen overflow-x-clip">
       <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
         <img src={logo.url} alt="BuildVibe" className="h-9 w-auto md:h-11" />
-        <button onClick={show} className="btn-brand">RSVP</button>
+        <a {...ext} className="btn-brand">RSVP</a>
       </header>
 
       {/* HERO */}
@@ -134,7 +137,7 @@ function Index() {
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-16 md:grid-cols-[auto_1fr_auto] md:py-24">
           <nav aria-label="Sections" className="hidden md:block">
             <ul className="flex flex-col gap-10 text-xs font-bold uppercase tracking-[0.25em]">
-              {[["#event", "Event"], ["#upcoming", "Upcoming"], ["#organizer", "Organizer"]].map(([href, label]) => (
+              {[["#event", "Event"], ["#faq", "FAQ"], ["#organizer", "Organizer"]].map(([href, label]) => (
                 <li key={href} className="[writing-mode:vertical-rl] rotate-180">
                   <a href={href} className="opacity-70 transition hover:text-brand hover:opacity-100">{label}</a>
                 </li>
@@ -158,9 +161,9 @@ function Index() {
               <span className="flex items-center gap-2">Show it off <span className="h-3 w-3 rounded-full bg-[#7b78ff]" /></span>
             </p>
             <p className="mt-4 max-w-md text-lg opacity-80">Free hands-on workshop. No coding experience needed. Limited spots, RSVP to save yours.</p>
-            <button onClick={show} className="mt-10 inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-lg font-bold text-black transition hover:-translate-y-0.5 hover:bg-brand">
+            <a {...ext} className="mt-10 inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-lg font-bold text-black transition hover:-translate-y-0.5 hover:bg-brand">
               RSVP for Nov 17 <span aria-hidden="true">→</span>
-            </button>
+            </a>
           </div>
 
           <Sticker className="mx-auto w-64 md:w-80" tilt="5deg">
@@ -211,7 +214,7 @@ function Index() {
               <p className="mt-6 rounded-xl border border-brand/50 bg-brand/10 px-4 py-3 text-sm font-medium">
                 <span className="font-bold text-brand">Limited capacity.</span> Spots are first come, first served, so please RSVP before the event to save yours.
               </p>
-              <button onClick={show} className="btn-brand mt-6 px-8 py-4">RSVP <span aria-hidden="true">→</span></button>
+              <a {...ext} className="btn-brand mt-6 px-8 py-4">RSVP on Eventbrite <span aria-hidden="true">→</span></a>
             </div>
           </div>
         </section>
@@ -257,6 +260,25 @@ function Index() {
           </div>
         </section>
 
+        {/* FAQ */}
+        <section id="faq" className="scroll-mt-8 py-16 md:py-24">
+          <h2 className="section-title mb-12">
+            F<span className="text-brand">A</span>Q
+          </h2>
+          <div className="flex max-w-3xl flex-col gap-4">
+            {FAQ.map(([q, a]) => (
+              <details key={q} className="group rounded-2xl border-2 border-white/15 bg-white/[0.04] px-6 py-5 transition open:border-brand">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-xl font-bold [&::-webkit-details-marker]:hidden">
+                  {q}
+                  <span aria-hidden="true" className="text-3xl leading-none text-brand transition group-open:rotate-45">+</span>
+                </summary>
+                <p className="mt-3 text-lg opacity-85">{a}</p>
+              </details>
+            ))}
+          </div>
+          <a {...ext} className="btn-brand mt-10 px-8 py-4">Save your spot <span aria-hidden="true">→</span></a>
+        </section>
+
         {/* ORGANIZER */}
         <section id="organizer" className="scroll-mt-8 py-16 md:py-24">
           <Label>Organizer</Label>
@@ -280,25 +302,16 @@ function Index() {
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <img src={logo.url} alt="BuildVibe" className="h-8 w-auto self-start" />
             <p className="text-sm opacity-70">Workshops, build nights &amp; builder meetups · Coming to more cities soon</p>
-            <a href={LINKEDIN} target="_blank" rel="noreferrer" className="text-sm font-bold text-brand hover:underline">LinkedIn</a>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-bold">
+              <a href={EVENTBRITE_ORG} target="_blank" rel="noreferrer" className="rounded-full border border-brand px-4 py-2 text-brand transition hover:bg-brand hover:text-black">
+                Follow us on Eventbrite
+              </a>
+              <a href={LINKEDIN} target="_blank" rel="noreferrer" className="text-brand hover:underline">LinkedIn</a>
+            </div>
           </div>
         </div>
       </footer>
 
-      {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-6 backdrop-blur-sm" onClick={() => setOpen(false)}>
-          <div role="dialog" aria-modal="true" aria-labelledby="reg-title" className="relative w-full max-w-sm" onClick={(e) => e.stopPropagation()}>
-            <Sticker tilt="-2deg">
-              <button aria-label="Close" onClick={() => setOpen(false)} className="absolute right-[12%] top-[10%] text-3xl font-bold text-black/70 hover:text-black">×</button>
-              <p id="reg-title" className="font-display text-3xl font-extrabold leading-none text-black">RSVP opens soon!</p>
-              <p className="mt-3 font-medium text-black/75">Nov 17 · 6:00–8:30 pm · UWinnipeg. Spots are limited, so follow on LinkedIn to catch the RSVP link first.</p>
-              <a href={LINKEDIN} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 font-bold text-brand transition hover:-translate-y-0.5">
-                Follow on LinkedIn →
-              </a>
-            </Sticker>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
