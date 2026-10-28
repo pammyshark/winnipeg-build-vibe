@@ -120,8 +120,16 @@ const FAQ: [string, string][] = [
   ["Where exactly is it?", "At the University of Winnipeg. The exact room will be emailed to registered attendees."],
 ];
 
+const AGENDA: [string, string, string, boolean][] = [
+  ["6:00", "Check-in & food", "Grab a bite, find a seat and get your Lovable credits.", false],
+  ["6:10", "Intro to building with AI", "How to prompt AI to build for you, plus how to use it responsibly.", false],
+  ["6:30", "90-minute build sprint", "Mini hackathon: build your portfolio or business website, with helpers on hand.", true],
+  ["8:00", "Show & Tell", "Demo what you built. No pressure, just good vibes.", false],
+  ["8:25", "Wrap-up & what's next", "Photos, next BuildVibe events and how to keep building.", false],
+];
+
 const TOP = ["BuildVibe", "Build with AI", "Tue Nov 17", "University of Winnipeg", "Free", "No coding needed"];
-const BOTTOM = ["Nov 17 · 6:00–8:30 pm", "Limited spots · RSVP", "Portfolios", "Business websites", "Show & Tell", "Lovable credits for everyone"];
+const BOTTOM = ["Nov 17 · 6:00–8:30 pm", "Limited spots · RSVP", "90-min build sprint", "Portfolios", "Business websites", "Show & Tell", "Lovable credits for everyone"];
 
 function Index() {
   return (
@@ -138,7 +146,7 @@ function Index() {
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-16 md:grid-cols-[auto_1fr_auto] md:py-24">
           <nav aria-label="Sections" className="hidden md:block">
             <ul className="flex flex-col gap-10 text-xs font-bold uppercase tracking-[0.25em]">
-              {[["#event", "Event"], ["#faq", "FAQ"], ["#organizer", "Organizer"]].map(([href, label]) => (
+              {[["#event", "Event"], ["#agenda", "Agenda"], ["#faq", "FAQ"]].map(([href, label]) => (
                 <li key={href} className="[writing-mode:vertical-rl] rotate-180">
                   <a href={href} className="opacity-70 transition hover:text-brand hover:opacity-100">{label}</a>
                 </li>
@@ -165,6 +173,26 @@ function Index() {
             <a {...ext} className="mt-10 inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-lg font-bold text-black transition hover:-translate-y-0.5 hover:bg-brand">
               RSVP for Nov 17 <span aria-hidden="true">→</span>
             </a>
+
+            {/* SPONSOR */}
+            <a
+              href="https://lovable.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Sponsored by Lovable"
+              className="group mt-10 block w-fit -rotate-2 rounded-2xl bg-[linear-gradient(120deg,#ff6a00,#ff2d55,#f55ce6,#6b7bff)] p-[2px] shadow-[0_18px_50px_-12px_rgba(255,90,60,.55)] transition duration-300 hover:rotate-0 hover:-translate-y-1"
+            >
+              <span className="flex items-center gap-5 rounded-[14px] bg-black/75 px-5 py-4 backdrop-blur">
+                <span className="flex flex-col">
+                  <span className="flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.25em] text-brand">
+                    <Star /> Official community event
+                  </span>
+                  <span className="mt-1 text-xs font-medium uppercase tracking-[0.2em] opacity-70">Sponsored by</span>
+                </span>
+                <img src="/lovable-logo-white.png" alt="Lovable" className="h-7 w-auto md:h-8" />
+              </span>
+            </a>
+            <p className="mt-3 pl-1 text-sm opacity-70">Every attendee gets free Lovable credits to build with.</p>
           </div>
 
           <Sticker className="mx-auto w-64 md:w-80" tilt="5deg">
@@ -199,7 +227,7 @@ function Index() {
             <div>
               <h2 className="font-display text-4xl font-extrabold leading-none tracking-tight md:text-6xl">BuildVibe: Build with AI</h2>
               <p className="mt-6 text-lg opacity-85">
-                A hands-on workshop where you'll build your own portfolio, or a website for the business you're dreaming of, using AI. We'll finish with a Show &amp; Tell where everyone demos what they built.
+                A hands-on workshop with a mini hackathon. After a quick intro to building with AI, you'll get a 90-minute build sprint to create your own portfolio, or a website for the business you're dreaming of. We'll finish with a Show &amp; Tell where everyone demos what they built.
               </p>
               <dl className="mt-6 grid grid-cols-2 gap-4 text-sm">
                 {[["Date", "Tuesday, November 17"], ["Time", "6:00–8:30 pm"], ["Venue", "University of Winnipeg (room TBA)"], ["Cost", "Free · Lovable credits for everyone"]].map(([k, v]) => (
@@ -218,6 +246,30 @@ function Index() {
               <a {...ext} className="btn-brand mt-6 px-8 py-4">RSVP on Eventbrite <span aria-hidden="true">→</span></a>
             </div>
           </div>
+        </section>
+
+        {/* AGENDA */}
+        <section id="agenda" className="scroll-mt-8 py-16 md:py-24">
+          <h2 className="section-title mb-12">
+            The <span className="text-brand">plan</span>
+          </h2>
+          <ol className="flex max-w-3xl flex-col gap-4">
+            {AGENDA.map(([time, title, desc, hot]) => (
+              <li
+                key={time}
+                className={`flex gap-5 rounded-2xl px-6 py-5 md:gap-8 ${hot ? "card-pop" : "border-2 border-white/15 bg-white/[0.04]"}`}
+              >
+                <span className={`w-14 shrink-0 font-display text-xl font-extrabold md:w-16 md:text-2xl ${hot ? "text-brand" : "opacity-80"}`}>{time}</span>
+                <span>
+                  <span className="flex flex-wrap items-center gap-3 font-display text-xl font-bold md:text-2xl">
+                    {title}
+                    {hot && <span className="rounded-full bg-brand px-3 py-0.5 text-xs font-extrabold uppercase tracking-wider text-black">Mini hackathon</span>}
+                  </span>
+                  <span className="mt-1 block opacity-80">{desc}</span>
+                </span>
+              </li>
+            ))}
+          </ol>
         </section>
 
         {/* WALK AWAY */}
