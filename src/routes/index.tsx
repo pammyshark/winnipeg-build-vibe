@@ -117,19 +117,29 @@ const FAQ: [string, string][] = [
   ["What do I need to bring?", "A charged laptop. Tablets and phones won't work well for building."],
   ["Is it really free?", "Yes, completely free, including Lovable credits to build with."],
   ["What if I can't make it?", "Please cancel your ticket so someone on the waitlist can take your spot."],
-  ["Where exactly is it?", "At the University of Winnipeg. The exact room will be emailed to registered attendees."],
+  ["Where exactly is it?", "University of Winnipeg, Buhler Centre, 2nd floor, room 2BC55."],
 ];
 
-const AGENDA: [string, string, string, boolean][] = [
-  ["6:00", "Check-in & food", "Grab a bite, find a seat and get your Lovable credits.", false],
-  ["6:10", "Intro to building with AI", "How to prompt AI to build for you, plus how to use it responsibly.", false],
-  ["6:30", "90-minute build sprint", "Mini hackathon: build your portfolio or business website, with helpers on hand.", true],
-  ["8:00", "Show & Tell", "Demo what you built. No pressure, just good vibes.", false],
-  ["8:25", "Wrap-up & what's next", "Photos, next BuildVibe events and how to keep building.", false],
+const AGENDA: { time: string; title: string; desc: string; hot?: boolean; steps?: [string, string][] }[] = [
+  { time: "6:00", title: "Check-in & food", desc: "Grab a bite, find a seat, and set up your Lovable account and credits." },
+  { time: "6:10", title: "Intro to building with AI", desc: "How to prompt AI to build for you, plus how to use it responsibly." },
+  {
+    time: "6:30",
+    title: "90-minute guided build sprint",
+    desc: "I'll walk you through every step in real time, then you'll make it your own, with helpers on hand if you get stuck.",
+    hot: true,
+    steps: [
+      ["6:30", "Build-along: your first page, together"],
+      ["7:00", "Make it yours: customize your portfolio or business site"],
+      ["7:50", "Publish & get your link ready"],
+    ],
+  },
+  { time: "8:00", title: "Show & Tell", desc: "Demo what you built. No pressure, just good vibes." },
+  { time: "8:25", title: "Wrap-up & what's next", desc: "Photos, next BuildVibe events and how to keep building." },
 ];
 
-const TOP = ["BuildVibe", "Build with AI", "Tue Nov 17", "University of Winnipeg", "Free", "No coding needed"];
-const BOTTOM = ["Nov 17 · 6:00–8:30 pm", "Limited spots · RSVP", "90-min build sprint", "Portfolios", "Business websites", "Show & Tell", "Lovable credits for everyone"];
+const TOP = ["BuildVibe", "Build with AI", "Tue Nov 17", "UWinnipeg · Buhler Centre 2BC55", "Free", "No coding needed"];
+const BOTTOM = ["Nov 17 · 6:00–8:30 pm", "Limited spots · RSVP", "90-min guided build sprint", "Portfolios", "Business websites", "Show & Tell", "Lovable credits for everyone"];
 
 function Index() {
   return (
@@ -199,7 +209,7 @@ function Index() {
             <p className="font-display text-3xl font-extrabold leading-none text-black md:text-4xl">Event</p>
             <span className="my-3 rounded-xl bg-black px-4 py-1.5 font-display text-4xl font-extrabold text-brand md:text-5xl">#1</span>
             <p className="font-display text-xl font-extrabold leading-tight text-black md:text-2xl">Tue · Nov 17</p>
-            <p className="mt-1 text-sm font-bold uppercase tracking-widest text-black/70">6:00–8:30 pm · UWinnipeg</p>
+            <p className="mt-1 text-sm font-bold uppercase tracking-widest text-black/70">6:00–8:30 pm · Room 2BC55</p>
           </Sticker>
         </div>
 
@@ -227,10 +237,10 @@ function Index() {
             <div>
               <h2 className="font-display text-4xl font-extrabold leading-none tracking-tight md:text-6xl">BuildVibe: Build with AI</h2>
               <p className="mt-6 text-lg opacity-85">
-                A hands-on workshop with a mini hackathon. After a quick intro to building with AI, you'll get a 90-minute build sprint to create your own portfolio, or a website for the business you're dreaming of. We'll finish with a Show &amp; Tell where everyone demos what they built.
+                A hands-on workshop with a guided mini hackathon. After a quick intro to building with AI, I'll guide you step by step in real time through a 90-minute build sprint, as you create your own portfolio or a website for the business you're dreaming of. We'll finish with a Show &amp; Tell where everyone demos what they built.
               </p>
               <dl className="mt-6 grid grid-cols-2 gap-4 text-sm">
-                {[["Date", "Tuesday, November 17"], ["Time", "6:00–8:30 pm"], ["Venue", "University of Winnipeg (room TBA)"], ["Cost", "Free · Lovable credits for everyone"]].map(([k, v]) => (
+                {[["Date", "Tuesday, November 17"], ["Time", "6:00–8:30 pm"], ["Venue", "University of Winnipeg, Buhler Centre, 2nd floor, room 2BC55"], ["Cost", "Free · Lovable credits for everyone"]].map(([k, v]) => (
                   <div key={k}>
                     <dt className="text-xs font-bold uppercase tracking-widest text-brand">{k}</dt>
                     <dd className="mt-1 font-medium">{v}</dd>
@@ -254,18 +264,28 @@ function Index() {
             The <span className="text-brand">plan</span>
           </h2>
           <ol className="flex max-w-3xl flex-col gap-4">
-            {AGENDA.map(([time, title, desc, hot]) => (
+            {AGENDA.map(({ time, title, desc, hot, steps }) => (
               <li
                 key={time}
                 className={`flex gap-5 rounded-2xl px-6 py-5 md:gap-8 ${hot ? "card-pop" : "border-2 border-white/15 bg-white/[0.04]"}`}
               >
                 <span className={`w-14 shrink-0 font-display text-xl font-extrabold md:w-16 md:text-2xl ${hot ? "text-brand" : "opacity-80"}`}>{time}</span>
-                <span>
+                <span className="min-w-0">
                   <span className="flex flex-wrap items-center gap-3 font-display text-xl font-bold md:text-2xl">
                     {title}
-                    {hot && <span className="rounded-full bg-brand px-3 py-0.5 text-xs font-extrabold uppercase tracking-wider text-black">Mini hackathon</span>}
+                    {hot && <span className="rounded-full bg-brand px-3 py-0.5 text-xs font-extrabold uppercase tracking-wider text-black">Guided</span>}
                   </span>
                   <span className="mt-1 block opacity-80">{desc}</span>
+                  {steps && (
+                    <span className="mt-4 flex flex-col gap-2">
+                      {steps.map(([t, d]) => (
+                        <span key={t} className="flex gap-3 text-sm">
+                          <span className="w-10 shrink-0 font-bold text-brand">{t}</span>
+                          <span className="opacity-90">{d}</span>
+                        </span>
+                      ))}
+                    </span>
+                  )}
                 </span>
               </li>
             ))}
