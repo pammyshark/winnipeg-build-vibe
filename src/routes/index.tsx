@@ -117,7 +117,7 @@ const FAQ: [string, string][] = [
   ["What do I need to bring?", "A charged laptop. Tablets and phones won't work well for building."],
   ["Is it really free?", "Yes, completely free, including Lovable credits to build with."],
   ["What if I can't make it?", "Please cancel your ticket so someone on the waitlist can take your spot."],
-  ["Where exactly is it?", "University of Winnipeg, Buhler Centre, 2nd floor, room 2BC55."],
+  ["Where exactly is it?", "Buhler Centre, University of Winnipeg, 460 Portage Avenue. Head to the 2nd floor, room 2BC55."],
 ];
 
 const AGENDA: { time: string; title: string; desc: string; hot?: boolean; steps?: [string, string][] }[] = [
@@ -138,7 +138,7 @@ const AGENDA: { time: string; title: string; desc: string; hot?: boolean; steps?
   { time: "8:25", title: "Wrap-up & what's next", desc: "Photos, next BuildVibe events and how to keep building." },
 ];
 
-const TOP = ["BuildVibe", "Build with AI", "Tue Nov 17", "UWinnipeg · Buhler Centre 2BC55", "Free", "No coding needed"];
+const TOP = ["BuildVibe", "Build with AI", "Tue Nov 17", "Buhler Centre · 460 Portage Ave", "Free", "No coding needed"];
 const BOTTOM = ["Nov 17 · 6:00–8:30 pm", "Limited spots · RSVP", "90-min guided build sprint", "Portfolios", "Business websites", "Show & Tell", "Lovable credits for everyone"];
 
 function Index() {
@@ -209,7 +209,7 @@ function Index() {
             <p className="font-display text-3xl font-extrabold leading-none text-black md:text-4xl">Event</p>
             <span className="my-3 rounded-xl bg-black px-4 py-1.5 font-display text-4xl font-extrabold text-brand md:text-5xl">#1</span>
             <p className="font-display text-xl font-extrabold leading-tight text-black md:text-2xl">Tue · Nov 17</p>
-            <p className="mt-1 text-sm font-bold uppercase tracking-widest text-black/70">6:00–8:30 pm · Room 2BC55</p>
+            <p className="mt-1 text-sm font-bold uppercase tracking-widest text-black/70">6:00–8:30 pm · Buhler Centre</p>
           </Sticker>
         </div>
 
@@ -240,13 +240,21 @@ function Index() {
                 A hands-on workshop with a guided mini hackathon. After a quick intro to building with AI, I'll guide you step by step in real time through a 90-minute build sprint, as you create your own portfolio or a website for the business you're dreaming of. We'll finish with a Show &amp; Tell where everyone demos what they built.
               </p>
               <dl className="mt-6 grid grid-cols-2 gap-4 text-sm">
-                {[["Date", "Tuesday, November 17"], ["Time", "6:00–8:30 pm"], ["Venue", "University of Winnipeg, Buhler Centre, 2nd floor, room 2BC55"], ["Cost", "Free · Lovable credits for everyone"]].map(([k, v]) => (
+                {[["Date", "Tuesday, November 17"], ["Time", "6:00–8:30 pm"], ["Venue", "Buhler Centre, University of Winnipeg · 460 Portage Ave · 2nd floor, room 2BC55"], ["Cost", "Free · Lovable credits for everyone"]].map(([k, v]) => (
                   <div key={k}>
                     <dt className="text-xs font-bold uppercase tracking-widest text-brand">{k}</dt>
                     <dd className="mt-1 font-medium">{v}</dd>
                   </div>
                 ))}
               </dl>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Buhler+Centre+460+Portage+Avenue+Winnipeg"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-3 inline-flex items-center gap-2 text-sm font-bold text-brand hover:underline"
+              >
+                Open in Google Maps <span aria-hidden="true">↗</span>
+              </a>
               <div className="mt-6 flex flex-wrap gap-2">
                 {["In person", "Beginner-friendly", "18+", "Free"].map((t) => <span key={t} className="pill">{t}</span>)}
               </div>
