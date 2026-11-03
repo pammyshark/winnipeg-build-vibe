@@ -125,7 +125,7 @@ const AGENDA: { time: string; title: string; desc: string; hot?: boolean; steps?
   { time: "6:10", title: "Intro to building with AI", desc: "How to prompt AI to build for you, plus how to use it responsibly." },
   {
     time: "6:30",
-    title: "90-minute guided build sprint",
+    title: "90-minute guided build session",
     desc: "I'll walk you through every step in real time, then you'll make it your own, with helpers on hand if you get stuck.",
     hot: true,
     steps: [
@@ -139,7 +139,7 @@ const AGENDA: { time: string; title: string; desc: string; hot?: boolean; steps?
 ];
 
 const TOP = ["BuildVibe", "Build with AI", "Tue Nov 17", "Buhler Centre · 460 Portage Ave", "Free", "No coding needed"];
-const BOTTOM = ["Nov 17 · 6:00–8:30 pm", "Limited spots · RSVP", "90-min guided build sprint", "Portfolios", "Business websites", "Show & Tell", "Lovable credits for everyone"];
+const BOTTOM = ["Nov 17 · 6:00–8:30 pm", "Limited spots · RSVP", "90-min guided build session", "Portfolios", "Business websites", "Show & Tell", "Lovable credits for everyone"];
 
 function Index() {
   return (
@@ -237,7 +237,7 @@ function Index() {
             <div>
               <h2 className="font-display text-4xl font-extrabold leading-none tracking-tight md:text-6xl">BuildVibe: Build with AI</h2>
               <p className="mt-6 text-lg opacity-85">
-                A hands-on workshop with a guided mini hackathon. After a quick intro to building with AI, I'll guide you step by step in real time through a 90-minute build sprint, as you create your own portfolio or a website for the business you're dreaming of. We'll finish with a Show &amp; Tell where everyone demos what they built.
+                Bring an idea, leave with a real website. After a quick intro to building with AI, we'll build together in a 90-minute guided session, creating your own portfolio or a site for your business idea. We'll wrap up with a Show &amp; Tell to celebrate what everyone made.
               </p>
               <dl className="mt-6 grid grid-cols-2 gap-4 text-sm">
                 {[["Date", "Tuesday, November 17"], ["Time", "6:00–8:30 pm"], ["Venue", "Buhler Centre, University of Winnipeg · 460 Portage Ave · 2nd floor, room 2BC55"], ["Cost", "Free · Lovable credits for everyone"]].map(([k, v]) => (
